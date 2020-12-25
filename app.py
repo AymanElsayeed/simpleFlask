@@ -42,8 +42,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="write file")
     parser.add_argument("-hp", "--host", help="host ip", type=str, default="127.0.0.1")
     parser.add_argument("-p", "--port", help="port", type=int, default="5000")
-    parser.add_argument("-d", "--debug", help="file name", type=bool, default=True)
-    parser.add_argument("-env", "--environment", help="file name", type=str, default="local")
+    parser.add_argument("-d", "--debug", help="debug", type=bool, default=True)
+    parser.add_argument("-env", "--environment", help="environment name", type=str, default="local")
 
     args = parser.parse_args()
 
