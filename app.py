@@ -2,7 +2,10 @@ import argparse
 
 from flask import Flask, jsonify, abort, render_template, redirect, session
 
-from src.config import FactoryConfigClass
+try:
+    from src.config import FactoryConfigClass
+except ModuleNotFoundError:
+    from flaskProject.src.config import FactoryConfigClass
 
 app = Flask(__name__)
 app.secret_key = 'the random string'
