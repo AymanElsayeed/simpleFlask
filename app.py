@@ -1,4 +1,8 @@
+import argparse
+
 from flask import Flask, jsonify, abort, render_template, redirect, session
+
+from src.config import FactoryConfigClass
 
 app = Flask(__name__)
 app.secret_key = 'the random string'
@@ -35,4 +39,15 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    parser = argparse.ArgumentParser(description="write file")
+    parser.add_argument("-hp", "--host", help="host ip", type=str, default="127.0.0.1")
+    parser.add_argument("-p", "--port", help="port", type=int, default="5000")
+    parser.add_argument("-d", "--debug", help="file name", type=bool, default=True)
+    parser.add_argument("-env", "--environment", help="file name", type=str, default="local")
+
+    args = parser.parse_args()
+
+    run_env_config = FactoryConfigClass(env=args.environment)
+    globals().update(run_env_config.config.__dict__)
+    # app.run(debug=True)
+    app.run(debug=args.debug, host=args.host, port=args.port)
