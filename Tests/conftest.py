@@ -18,7 +18,7 @@ def get_config_class(env):
 
 
 @fixture(scope="session")
-def get_api_client(env):
+def client(env):
     run_env = get_config_class(env=env)
     app.app.config.update(run_env.__dict__)
     api = app.app.test_client()
