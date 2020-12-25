@@ -1,16 +1,19 @@
 from flask import Flask, jsonify, abort, render_template, redirect, session
 
 app = Flask(__name__)
+app.secret_key = 'the random string'
 
 
 @app.route('/')
 def hello_world():
-    return 'Hello World!'
+    return render_template('home.html', numbers=session.keys())
+    # return 'Hello World!'
 
 
 @app.route('/<int:code>')
 def is_even(code):
     if code % 2 == 0:
+        session[str(code)] = True
         return jsonify(number=code, message="the number is even")
     else:
         return redirect(f"/is_odd/{code}")
@@ -20,6 +23,7 @@ def is_even(code):
 @app.route('/is_odd/<int:n>')
 def is_odd(n):
     if n % 2 != 0:
+        session[str(n)] = True
         return jsonify(number=n, message="the number is odd")
     else:
         abort(404)
