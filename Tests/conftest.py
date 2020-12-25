@@ -1,8 +1,16 @@
-import pytest
 from pytest import fixture
+from flaskProject.src.config import FactoryConfigClass
+from flaskProject import app
 
-import app
-from src.config import FactoryConfigClass
+
+def pytest_addoption(parser):
+    parser.addoption("--env", action="store", help="environment to ru tests against")
+
+
+@fixture(scope="session")
+def env(request):
+    env = request.config.getoption("--env")
+    return env
 
 
 def get_config_class(env):
