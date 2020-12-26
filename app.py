@@ -1,7 +1,23 @@
 import argparse
 
 from flask import Flask, jsonify, abort, render_template, redirect, session
-
+from logging.config import dictConfig
+dictConfig({
+    'version': 1,
+    'formatters': {'default': {
+        'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+    }},
+    'handlers': {'file': {
+        'class': 'logging.FileHandler',
+        'filename': 'errors.log',
+        'formatter': 'default',
+        'level': 'DEBUG'
+    }},
+    'root': {
+        'level': 'DEBUG',
+        'handlers': ['file']
+    }
+})
 try:
     from src.config import FactoryConfigClass
 except ModuleNotFoundError:
@@ -30,6 +46,7 @@ def is_even(code):
 @app.route('/is_odd/<int:n>')
 def is_odd(n):
     if n % 2 != 0:
+        app.logger.info(f"{n} is even number")
         session[str(n)] = True
         return jsonify(number=n, message="the number is odd")
     else:
@@ -49,7 +66,6 @@ if __name__ == '__main__':
     parser.add_argument("-env", "--environment", help="environment name", type=str, default="local")
 
     args = parser.parse_args()
-
     run_env_config = FactoryConfigClass(env=args.environment)
     globals().update(run_env_config.config.__dict__)
     # app.run(debug=True)
