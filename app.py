@@ -37,6 +37,7 @@ def hello_world():
 def is_even(code):
     if code % 2 == 0:
         session[str(code)] = True
+        app.logger.info(f"{code} is even number")
         return jsonify(number=code, message="the number is even")
     else:
         return redirect(f"/is_odd/{code}")
@@ -46,7 +47,7 @@ def is_even(code):
 @app.route('/is_odd/<int:n>')
 def is_odd(n):
     if n % 2 != 0:
-        app.logger.info(f"{n} is even number")
+        app.logger.info(f"{n} is odd number")
         session[str(n)] = True
         return jsonify(number=n, message="the number is odd")
     else:
