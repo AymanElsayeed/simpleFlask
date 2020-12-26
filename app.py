@@ -1,6 +1,6 @@
 import argparse
 
-from flask import Flask, jsonify, abort, render_template, redirect, session
+from flask import Flask, jsonify, abort, render_template, redirect, session, request
 from logging.config import dictConfig
 dictConfig({
     'version': 1,
@@ -52,6 +52,17 @@ def is_odd(n):
         return jsonify(number=n, message="the number is odd")
     else:
         abort(404)
+
+
+@app.route('/is_prime', methods=["POST"])
+def is_prime():
+    number = request.args.get("number")
+    if number is None:
+        number = request.get_json()['number']
+    for i in range(2, number):
+        if number % i == 0:
+            return jsonify(data=i, message=f"number {number} is not prime")
+    return jsonify(data=i, message=f"number {number} is prime")
 
 
 @app.errorhandler(404)
