@@ -8,7 +8,7 @@ class ProductionConfig(FConfig):
         super().__init__()
         self.FLASK_EXT_PORT = "30333"
         self.DEBUG = False
-        self.LOGGING_PATH = "/mdclone/synthetic/logs"
+        self.LOGGING_PATH = "/synthetic/logs"
 
 
 class DevelopmentConfig(FConfig):
@@ -16,7 +16,7 @@ class DevelopmentConfig(FConfig):
         super().__init__()
         self.FLASK_EXT_PORT = "30331"
         self.DEBUG = True
-        self.LOGGING_PATH = "/mdclone/synthetic/logs"
+        self.LOGGING_PATH = "/synthetic/logs"
 
 
 class TestingConfig(FConfig):
@@ -24,7 +24,7 @@ class TestingConfig(FConfig):
         super().__init__()
         self.TESTING = True
         self.FLASK_EXT_PORT = "30331"
-        self.LOGGING_PATH = "/mdclone/logs/synflaskapi/testing/"
+        self.LOGGING_PATH = "/logs/synflaskapi/testing/"
         self.NAMESPACE = "synthetic-process-testing"
 
 
@@ -35,7 +35,7 @@ class LocalConfig(FConfig):
         self.ENV = "local"
 
         self.ssv = "/Users/ayman/syndata"
-        self.ssd = "/mdclone/synthetic"
+        self.ssd = "/synthetic"
         self.LOGGING_PATH = "/Users/ayman/syndata/logs"
         self.logging_path = "/Users/ayman/syndata/logs"
         self.moc_data_path = "./data/MOCK_DATA.csv"
