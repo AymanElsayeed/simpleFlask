@@ -1,9 +1,19 @@
+"""
+
+Configuration module for the Flask API
+
+"""
+
+
 class FConfig(object):
     def __init__(self):
         pass
 
 
 class ProductionConfig(FConfig):
+    """
+    Production configuration class
+    """
     def __init__(self):
         super().__init__()
         self.FLASK_EXT_PORT = "30333"
@@ -12,6 +22,9 @@ class ProductionConfig(FConfig):
 
 
 class DevelopmentConfig(FConfig):
+    """
+    Development configuration class
+    """
     def __init__(self):
         super().__init__()
         self.FLASK_EXT_PORT = "30331"
@@ -20,6 +33,9 @@ class DevelopmentConfig(FConfig):
 
 
 class TestingConfig(FConfig):
+    """
+    Testing configuration class
+    """
     def __init__(self):
         super().__init__()
         self.TESTING = True
@@ -29,6 +45,9 @@ class TestingConfig(FConfig):
 
 
 class LocalConfig(FConfig):
+    """
+    Local configuration class
+    """
     def __init__(self):
         super().__init__()
         self.TESTING = False
@@ -47,6 +66,9 @@ class LocalConfig(FConfig):
 
 
 class FactoryConfigClass:
+    """
+    Factory class to create the configuration class based on the environment
+    """
     def __init__(self, env):
         print("the env is ", env)
         if env == "local":
