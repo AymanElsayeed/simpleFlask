@@ -31,9 +31,10 @@ class TestingConfig(FConfig):
 class LocalConfig(FConfig):
     def __init__(self):
         super().__init__()
-        self.TESTING = True
+        self.TESTING = False
         self.ENV = "local"
-
+        self.threaded = True
+        self.debug = True
         self.ssv = "/Users/ayman/syndata"
         self.ssd = "/synthetic"
         self.LOGGING_PATH = "/Users/ayman/syndata/logs"
