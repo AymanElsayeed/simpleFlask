@@ -1,3 +1,9 @@
+"""
+
+This module contains the fixtures that are used to run the tests.
+
+"""
+
 from pytest import fixture
 from flaskProject.src.config import FactoryConfigClass
 from flaskProject import app
