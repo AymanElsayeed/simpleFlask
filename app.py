@@ -2,6 +2,7 @@ import argparse
 
 from flask import Flask, jsonify, abort, render_template, redirect, session, request
 from logging.config import dictConfig
+
 dictConfig({
     'version': 1,
     'formatters': {'default': {
@@ -18,10 +19,8 @@ dictConfig({
         'handlers': ['file']
     }
 })
-try:
-    from src.config import FactoryConfigClass
-except ModuleNotFoundError:
-    from flaskProject.src.config import FactoryConfigClass
+
+from src.config import FactoryConfigClass
 
 app = Flask(__name__)
 app.secret_key = 'the random string'
