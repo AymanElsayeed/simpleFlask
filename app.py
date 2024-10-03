@@ -79,6 +79,9 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     run_env_config = FactoryConfigClass(env=args.environment)
-    globals().update(run_env_config.config.__dict__)
+    app.config.from_object(run_env_config.config)
+
+    # globals().update(run_env_config.config.__dict__)
     # app.run(debug=True)
-    app.run(debug=args.debug, host=args.host, port=args.port)
+
+    app.run(debug=app.config['debug'], host=args.host, port=args.port, threaded=app.config['threaded'])
