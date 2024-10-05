@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - MySecondAppTest
+name: Build and deploy Python app to Azure Web App - AymanApp1
 
 on:
   push:
@@ -65,14 +65,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_981081C02C324212BFDC1C71728BFEB6 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_749E4A3CCBE9478A87F7AE1A2850AAB9 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_17181563DCE44261BDCEDC745A651A22 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EF39FDF829C94537A4C19CBFEE464575 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9B71EE6B65DE44F686E207448A22B033 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4F72D20C6B4C47BC9E40CCC55EA53E90 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'MySecondAppTest'
+          app-name: 'AymanApp1'
           slot-name: 'Production'
           
