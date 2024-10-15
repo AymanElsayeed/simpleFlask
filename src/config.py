@@ -18,7 +18,7 @@ class ProductionConfig(FConfig):
         super().__init__()
         self.FLASK_EXT_PORT = "30333"
         self.DEBUG = False
-        self.LOGGING_PATH = "/synthetic/logs"
+        self.LOGGING_PATH = "./logs"
 
 
 class DevelopmentConfig(FConfig):
@@ -29,7 +29,7 @@ class DevelopmentConfig(FConfig):
         super().__init__()
         self.FLASK_EXT_PORT = "30331"
         self.DEBUG = True
-        self.LOGGING_PATH = "/synthetic/logs"
+        self.LOGGING_PATH = "./logs"
 
 
 class TestingConfig(FConfig):
@@ -40,8 +40,8 @@ class TestingConfig(FConfig):
         super().__init__()
         self.TESTING = True
         self.FLASK_EXT_PORT = "30331"
-        self.LOGGING_PATH = "/logs/flaskapi/testing/"
-        self.NAMESPACE = "synthetic-process-testing"
+        self.LOGGING_PATH = "./logs/testing/"
+        self.NAMESPACE = "process-testing"
 
 
 class LocalConfig(FConfig):
@@ -50,19 +50,13 @@ class LocalConfig(FConfig):
     """
     def __init__(self):
         super().__init__()
-        self.TESTING = False
+        self.TESTING = True
         self.ENV = "local"
         self.threaded = True
-        self.debug = True
-        self.ssv = "/Users/ayman/syndata"
-        self.ssd = "/synthetic"
-        self.LOGGING_PATH = "~/data/logs"
-        self.logging_path = "~/syndata/logs"
-        self.moc_data_path = "./data/MOCK_DATA.csv"
-        self.regex_db = "./Src/regex_db.csv"
-        self.data_path = "~/syndata/"
-        self.DEFAULT_MAIN_DIR_FILE = self.data_path
-        self.kube_files = "~/Documents/WProject/r-to-py-synthetic/API/Kubernetes/"
+        self.FLASK_EXT_PORT = 30333
+        self.HOST = "0.0.0.0"
+        self.DEBUG = True
+        self.LOGGING_PATH = "./logs"
 
 
 class FactoryConfigClass:
