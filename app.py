@@ -1,5 +1,6 @@
 import argparse
-
+import os
+import sys
 from flask import Flask, jsonify, abort, render_template, redirect, session, request
 from logging.config import dictConfig
 
@@ -70,17 +71,30 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="write file")
-    parser.add_argument("-hp", "--host", help="host ip", type=str, default="127.0.0.1")
-    parser.add_argument("-p", "--port", help="port", type=int, default="5000")
-    parser.add_argument("-d", "--debug", help="debug", type=bool, default=True)
-    parser.add_argument("-env", "--environment", help="environment name", type=str, default="local")
+    # parser = argparse.ArgumentParser(description="write file")
+    # # parser.add_argument("-hp", "--host", help="host ip", type=str, default="0.0.0.0")
+    # parser.add_argument("-hp", "--host", help="host ip", type=str, default="0.0.0.0")
+    # parser.add_argument("-p", "--port", help="port", type=int, default="30331")
+    # parser.add_argument("-d", "--debug", help="debug", type=bool, default=True)
+    # parser.add_argument("-env", "--environment", help="environment name", type=str, default="local")
 
-    args = parser.parse_args()
-    run_env_config = FactoryConfigClass(env=args.environment)
-    app.config.from_object(run_env_config.config)
+    # args = parser.parse_args()
+    # run_env_config = FactoryConfigClass(env=args.environment)
+    #app.config.from_object(run_env_config.config)
 
     # globals().update(run_env_config.config.__dict__)
-    # app.run(debug=True)
+    env = os.getenv("ENV", "local")
+    run_env_config = FactoryConfigClass(env=env)
+    # app.config.from_object(run_env_config.config)
+    port = os.getenv("FLASK_EXT_PORT", 30331)
+    host = os.getenv("FLASK_EXT_HOST", "0.0.0.0")
 
-    app.run(debug=app.config['debug'], host=args.host, port=args.port, threaded=app.config['threaded'])
+
+    print(f"the ENV is {env}", file=sys.stderr)
+    print(f"the port is {run_env_config.config.FLASK_EXT_PORT}", file=sys.stderr)
+    print(f"the host is {run_env_config.config.HOST}", file=sys.stderr)
+
+    app.run(debug=True,
+            port=port,
+            host=host
+            )
