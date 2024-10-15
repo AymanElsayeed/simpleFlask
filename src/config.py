@@ -5,12 +5,12 @@ Configuration module for the Flask API
 """
 
 
-class FConfig(object):
+class ABCConfig(object):
     def __init__(self):
         pass
 
 
-class ProductionConfig(FConfig):
+class ProductionConfig(ABCConfig):
     """
     Production configuration class
     """
@@ -21,7 +21,7 @@ class ProductionConfig(FConfig):
         self.LOGGING_PATH = "./logs"
 
 
-class DevelopmentConfig(FConfig):
+class DevelopmentConfig(ABCConfig):
     """
     Development configuration class
     """
@@ -32,7 +32,7 @@ class DevelopmentConfig(FConfig):
         self.LOGGING_PATH = "./logs"
 
 
-class TestingConfig(FConfig):
+class TestingConfig(ABCConfig):
     """
     Testing configuration class
     """
@@ -44,7 +44,7 @@ class TestingConfig(FConfig):
         self.NAMESPACE = "process-testing"
 
 
-class LocalConfig(FConfig):
+class LocalConfig(ABCConfig):
     """
     Local configuration class
     """
@@ -75,4 +75,4 @@ class FactoryConfigClass:
         elif env == "prod":
             self.config = ProductionConfig()
         else:
-            self.config = FConfig()
+            self.config = ABCConfig()
